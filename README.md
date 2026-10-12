@@ -53,19 +53,21 @@ The managed identity path and telemetry path are separate. Reader permits manage
 | KQL success filter | Passed | Successful tag-write row with caller |
 | Activity Log alert | Passed | Fired alert at 23:09 UTC on 11 October |
 | Email receiver enrollment | Passed | LabEmail enrollment confirmation |
-| Actual alert email delivery | **Not verified** | Enrollment message is not an alert email |
+| Actual alert email delivery | **Passed — verified** | Private recording shows actual tag-write alert email at 01:53 UTC on 12 October |
 | Managed identity reads project group | Passed | PowerShell returned group name and `southafricanorth` |
 | Agent heartbeat | Passed | Windows heartbeat at 01:13 UTC on 12 October |
 | Guest performance ingestion | Passed | InsightsMetrics disk free-space, throughput and latency samples |
-| Cleanup | **Pending** | No deletion or deallocation evidence supplied |
+| Project resource-group deletion | **Verified** | Resource-group list and private recording show the project group absent |
+| Other Project 3 cleanup | **Completed — user confirmed** | Diagnostic setting, DCR/association and test identity removal confirmed by Samuel |
+| Reused VM deallocation | **Completed — user confirmed** | VM retained for earlier network lab; deallocation reported by Samuel |
 
-The alert review showed the Write tags signal but did not show a success-status filter. Its final status filtering is therefore not claimed as verified. Two alert instances appeared in the list; only the project resource-group instance was inspected.
+The alert review showed the Write tags signal but did not show a success-status filter. Its final status filtering is therefore not claimed as verified. The private email recording also shows a second notification for the `Microsoft.Resources/tags/default` resource within the same project group.
 
 ## Troubleshooting demonstrated
 
 1. RDP failed because the administrator's current public IP differed from the `/32` source allowed by the subnet NSG. Updating `Allow-RDP-My-PC` restored the connection while keeping access restricted to one IP.
 2. A multiline PowerShell paste broke the token request. Running each command on one line fixed the syntax; the VM then successfully called Azure Resource Manager using its own identity.
-3. Email receiver verification was required. Enrollment was confirmed, but end-to-end alert email receipt still needs evidence.
+3. Email receiver verification was required. Enrollment and subsequent end-to-end alert email receipt were confirmed.
 
 ## Files
 
@@ -85,4 +87,4 @@ Upload this folder's contents to the repository root. Add reviewed screenshots u
 
 ## Portfolio statement
 
-Implemented resource-group-scoped Reader access through a Microsoft Entra security group and verified allowed reads and denied tag writes with a separate account. Configured Administrative Activity Log export, investigated events with KQL, triggered an Activity Log alert, tested a VM managed identity against Azure Resource Manager, and verified guest heartbeat and performance ingestion into Log Analytics.
+Implemented resource-group-scoped Reader access through a Microsoft Entra security group and verified allowed reads and denied tag writes with a separate account. Configured Administrative Activity Log export, investigated events with KQL, triggered and received an Activity Log email alert, tested a VM managed identity against Azure Resource Manager, and verified guest heartbeat and performance ingestion into Log Analytics.
