@@ -10,7 +10,7 @@ Demonstrate practical administration of identity, permissions, audit logs and vi
 
 ### Identity and least privilege
 
-Created `rg-identity-monitoring-lab` and an Assigned security group, `sg-azure-lab-readers`. Assigned Reader to that group on the project resource group. Created Azure Lab Reader without administrative roles and added it to the group. A separate browser session showed the user could view the group; a attempted tag update was rejected with `AuthorizationFailed`.
+Created `rg-identity-monitoring-lab` and an Assigned security group, `sg-azure-lab-readers`. Assigned Reader to that group on the project resource group. Created Azure Lab Reader without administrative roles and added it to the group. A separate browser session showed the user could view the group; an attempted tag update was rejected with `AuthorizationFailed`.
 
 This demonstrates the tested permission boundary for resource-group viewing and tag writes. It does not claim an exhaustive test of every Azure operation or unrelated inherited permissions.
 
@@ -24,7 +24,7 @@ The earlier denied test was not visible in the inspected Activity Log view; its 
 
 Created `alert-lab-tag-changes` using the Write tags Activity Log signal and configured `ag-lab-email`. The inspected alert fired at 23:09 UTC on 11 October for `Microsoft.Resources/tags/write` against the project resource group, initiated by the administrator. The receiver's enrollment confirmation was received.
 
-Actual tag-change alert email delivery remains unverified. The final success-status filter also requires confirmation from the rule's condition configuration. These limitations are explicitly retained for honest portfolio reporting.
+Actual tag-change alert email delivery was verified from the private recording `20261012-1329-05.5841079.mp4`. The email identifies `alert-lab-tag-changes`, the project resource group, the Administrative category, `Microsoft.Resources/tags/write`, and event time 01:53 UTC on 12 October 2026. A second notification identifies the tags/default resource in the same group. The final success-status filter still requires configuration evidence; email receipt alone does not verify that filter.
 
 ### Workload identity
 
@@ -42,7 +42,11 @@ A broken multiline PowerShell paste caused `-Uri` to execute independently and p
 
 ## Outcome
 
-Verified group-based read access, a denied tag modification, administrative log export, a fired alert, workload authentication and VM telemetry ingestion. Email alert delivery and cleanup are pending. The lab is appropriate evidence of hands-on Azure administration and troubleshooting, rather than a claim of production deployment experience.
+Verified group-based read access, a denied tag modification, administrative log export, a fired alert, workload authentication and VM telemetry ingestion. Actual alert email delivery is verified. Project resource-group deletion is verified from the resource-group list and recording. Samuel confirmed removal of the remaining Project 3 diagnostic setting, monitoring rule/association and test identities, and reported deallocation of the reused VM. Those remaining actions are user-confirmed rather than independently inspected. The lab is appropriate evidence of hands-on Azure administration and troubleshooting, rather than a claim of production deployment experience.
+
+## Cleanup outcome
+
+Completed on 12 October 2026. `rg-identity-monitoring-lab` was removed; the earlier `RG-CORP-NETWORK-LAB` and its VMs were preserved. Retained disks, public IPs and other earlier-lab resources can still incur charges. A final billing review and removal of unrelated default monitoring resources are not claimed as verified.
 
 ## Evidence and repeatability
 
