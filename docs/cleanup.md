@@ -1,6 +1,20 @@
-# Cleanup checklist — execution pending
+# Cleanup record — 12 October 2026
 
-Preserve required screenshots, configuration notes and test outputs first. These instructions have not been executed by the assistant.
+| Item | Status | Basis |
+|---|---|---|
+| `rg-identity-monitoring-lab` | Deleted — verified | Screenshot and recording show it absent from the resource-group list |
+| `diag-activity-to-law` | Removed — user confirmed | Samuel's confirmation of remaining checklist items |
+| Project VM DCR and association | Removed — user confirmed | Samuel's confirmation |
+| Azure Lab Reader user | Deleted — user confirmed | Samuel's confirmation |
+| `sg-azure-lab-readers` | Deleted — user confirmed | Samuel's confirmation |
+| `VM-MGMT-01` | Deallocated — user confirmed | Samuel's earlier completion confirmation |
+| `RG-CORP-NETWORK-LAB` | Preserved — verified | Recording shows earlier group and VMs retained |
+
+The assistant did not perform Azure deletions. Only the project resource-group deletion and preservation of earlier resources were independently inspected; other actions are recorded from Samuel's confirmation.
+
+Retained disks, public IPs and other resources may continue to incur charges. A final Cost Management review and cleanup of unrelated default monitoring resources have not been verified.
+
+## Reusable teardown procedure
 
 1. If the reused VM is no longer needed tonight, stop it through Azure Portal and confirm **Stopped (deallocated)**. Guest shutdown alone is not equivalent; disks and public IPs may still incur charges.
 2. For Project 3 teardown, remove the subscription diagnostic setting `diag-activity-to-law` before deleting its destination workspace.
