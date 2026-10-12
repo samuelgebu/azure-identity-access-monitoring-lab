@@ -1,0 +1,5 @@
+InsightsMetrics
+| where TimeGenerated > ago(30m)
+| where Computer =~ "VM-MGMT-01"
+| summarize Samples = count(), LatestSample = max(TimeGenerated) by Namespace, Name
+| order by Namespace asc, Name asc

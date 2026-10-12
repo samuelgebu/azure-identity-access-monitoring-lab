@@ -1,0 +1,6 @@
+AzureActivity
+| where TimeGenerated > ago(24h)
+| where ResourceGroup =~ "rg-identity-monitoring-lab"
+| where ActivityStatusValue =~ "Success"
+| project TimeGenerated, OperationNameValue, ActivityStatusValue, Caller
+| order by TimeGenerated desc
